@@ -11,44 +11,44 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="pb-4 text-lg font-bold">Daftar Menu</h3>
                     
-                    <div class="overflow-x-auto">
-                        <table class="w-full border border-gray-300 border-collapse dark:border-gray-700">
+                    <div class="overflow-x-auto w-full sm:rounded-lg">
+                        <table class="w-full min-w-full border border-gray-300 border-collapse dark:border-gray-700">
                             <thead>
                                 <tr class="text-gray-900 bg-gray-200 dark:bg-gray-700 dark:text-gray-100">
-                                    <th class="px-6 py-3 text-center border">No</th>
-                                    <th class="px-6 py-3 text-center border">ID</th>
-                                    <th class="px-6 py-3 text-center border">Nama Menu</th>
-                                    <th class="px-6 py-3 text-center border">Gambar</th>
-                                    <th class="px-6 py-3 text-center border">Aksi</th>
+                                    <th class="px-2 py-2 text-sm text-center border sm:px-6 sm:py-3 sm:text-base md:text-lg">No</th>
+                                    <th class="px-2 py-2 text-sm text-center border sm:px-6 sm:py-3 sm:text-base md:text-lg">ID</th>
+                                    <th class="px-2 py-2 text-sm text-center border sm:px-6 sm:py-3 sm:text-base md:text-lg">Nama Menu</th>
+                                    <th class="px-2 py-2 text-sm text-center border sm:px-6 sm:py-3 sm:text-base md:text-lg">Gambar</th>
+                                    <th class="px-2 py-2 text-sm text-center border sm:px-6 sm:py-3 sm:text-base md:text-lg">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($menus as $index => $menu)
                                 <tr class="border transition hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <td class="px-6 py-3 text-center border">{{ $index + 1 }}</td>
-                                    <td class="px-6 py-3 text-center border">{{ $menu->id }}</td>
-                                    <td class="px-6 py-3 font-bold text-center border">{{ $menu->name }}</td>
-                                    <td class="px-6 py-3 text-center border">
-                                        <div class="flex space-x-1 overflow-x-auto max-w-[200px]">
+                                    <td class="px-2 py-2 text-sm text-center border sm:px-6 sm:py-3 sm:text-base">{{ $index + 1 }}</td>
+                                    <td class="px-2 py-2 text-sm text-center border sm:px-6 sm:py-3 sm:text-base">{{ $menu->id }}</td>
+                                    <td class="px-2 py-2 text-sm font-bold text-center border sm:px-6 sm:py-3 sm:text-base">{{ $menu->name }}</td>
+                                    <td class="px-2 py-2 text-center border sm:px-6 sm:py-3">
+                                        <div class="flex space-x-1 overflow-x-auto max-w-[120px] sm:max-w-[200px] mx-auto">
                                             @foreach ($menu->images as $image)
                                                 <img src="{{ Storage::disk('s3')->url($image->image_path) }}" 
                                                      alt="Menu Preview" 
-                                                     class="w-6 h-6 rounded-md shadow-sm transition-transform cursor-pointer hover:scale-105">
+                                                     class="w-5 h-5 rounded-md shadow-sm transition-transform cursor-pointer sm:w-8 sm:h-8 hover:scale-105">
                                             @endforeach
                                         </div>
                                     </td>                          
-                                    <td class="px-6 py-3 text-center border">
+                                    <td class="px-2 py-2 text-center border sm:px-6 sm:py-3">
                                         <a href="{{ route('admin.qr', $menu->id) }}" 
-                                            class="inline-block px-5 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-md transition hover:bg-blue-700">
-                                            🔗 Generate QR
+                                            class="inline-block px-3 py-1 text-sm font-bold text-white bg-blue-500 rounded-lg shadow-md transition sm:px-5 sm:py-2 sm:text-base hover:bg-blue-700">
+                                            🔗 QR
                                         </a>
                                         <form action="{{ route('admin.delete', $menu->id) }}" method="POST" 
-                                            class="inline-block mt-2"
+                                            class="inline-block mt-1 sm:mt-2"
                                             onsubmit="return confirm('Yakin ingin menghapus menu ini?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" 
-                                                class="px-5 py-2 font-bold text-white bg-red-500 rounded-lg shadow-md transition hover:bg-red-700">
+                                                class="px-3 py-1 text-sm font-bold text-white bg-red-500 rounded-lg shadow-md transition sm:px-5 sm:py-2 sm:text-base hover:bg-red-700">
                                                 ❌ Hapus
                                             </button>
                                         </form>
